@@ -34,8 +34,7 @@ var bio = { //object bio begins
 
     //jQuery begins
     $("#header").prepend(formattedName, role, pictureURL);
-    $("#topContacts:last").append(mobile, email, github, twitter,loc);
-    $("#footerContacts").append(mobile, email, github, twitter,loc, facebook);
+    $("#topContacts:last,#footerContacts").append(mobile, email, github, twitter,loc, facebook);
     //jQuery ends
 
     if (bio.skills.length > 0) { // if statement begins
@@ -72,6 +71,10 @@ var education =
     url: ""
   }], //object education.onlineCourses array ends
   display: function() { // function education.display begins
+    function looper(element){
+      var formatted_schoolMajor = replaced(HTMLschoolMajor, element);
+      $(".education-entry").append( formatted_schoolMajor);
+    }
     if (education.schools.length > 0) {
       $("#education").append(HTMLschoolStart);
       for (var i = 0; i < education.schools.length; i++) {
@@ -80,22 +83,20 @@ var education =
         var formatted_schoolDates = replaced(HTMLschoolDates, education.schools[i].dates);
         var formatted_schoolLocation = replaced(HTMLschoolLocation, education.schools[i].location);
         $(".education-entry").append(formatted_schoolName,formatted_schoolDegree,formatted_schoolDates,formatted_schoolLocation);
-        education.schools[i].majors.forEach(function(element){
-          var formatted_schoolMajor = replaced(HTMLschoolMajor, element);
-          $(".education-entry").append( formatted_schoolMajor);
-        });
+        education.schools[i].majors.forEach(looper);
 
 
       }
 
+
     }
     if (education.onlineCourses.length > 0) {
       $(".education-entry").append(HTMLonlineClasses);
-      for (var i = 0; i < education.onlineCourses.length; i++) {
-        var formatted_onlineTitle = replaced(HTMLonlineTitle, education.onlineCourses[i].title);
-        var formatted_onlineSchool = replaced(HTMLonlineSchool, education.onlineCourses[i].school);
-        var formatted_onlineDates = replaced(HTMLonlineDates, education.onlineCourses[i].dates);
-        var formatted_onlineURL = replaced(HTMLonlineURL, education.onlineCourses[i].url);
+      for (var x = 0; x < education.onlineCourses.length; x++) {
+        var formatted_onlineTitle = replaced(HTMLonlineTitle, education.onlineCourses[x].title);
+        var formatted_onlineSchool = replaced(HTMLonlineSchool, education.onlineCourses[x].school);
+        var formatted_onlineDates = replaced(HTMLonlineDates, education.onlineCourses[x].dates);
+        var formatted_onlineURL = replaced(HTMLonlineURL, education.onlineCourses[x].url);
         $(".education-entry").append(formatted_onlineTitle,formatted_onlineSchool, formatted_onlineDates, formatted_onlineURL);
 
       }
@@ -155,11 +156,12 @@ var projects = { //object project begins
       var formatted_projectDescription = replaced(HTMLprojectDescription, projects.project[i].description);
       $("#projects").append(HTMLprojectStart);
       $(".project-entry:last").append(formatted_projectTitle,formatted_projectDates,formatted_projectDescription);
-      projects.project[i].image.forEach(function(element){
-        var formatted_projectImage = replaced(HTMLprojectImage, element);
-          $(".project-entry:last").append(formatted_projectImage);
-      });//projects.project[i].image forEach ends
+      projects.project[i].image.forEach(looper);//projects.project[i].image forEach ends
 
+    }
+    function looper(element){
+      var formatted_projectImage = replaced(HTMLprojectImage, element);
+        $(".project-entry:last").append(formatted_projectImage);
     }
   } // function projects.display ends
 };// object project ends
@@ -176,7 +178,6 @@ $(document).click(function(loc) {
   var y = loc.pageY;
   logClicks(x, y);
 });
-
 
 
 //Internationalise name function
