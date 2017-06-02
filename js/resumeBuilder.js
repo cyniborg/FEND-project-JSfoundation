@@ -16,7 +16,7 @@ var bio = { //object bio begins
   }, //object bio.contacts ends
   welcomeMessage: "I may not believe in myself but I believe in what I do.",
   skills: ["Eating", "Beers", "Burping"],
-  pictureURL: "./images/homer.jpg",
+  biopic: "./images/homer.jpg",
 
   display: function() { //function bio.display begins
 
@@ -29,7 +29,7 @@ var bio = { //object bio begins
     var email = replaced(HTMLemail, bio.contacts.email);
     var twitter = replaced(HTMLtwitter, bio.contacts.twitter);
     var facebook = replaced(HTMLcontactGeneric, bio.contacts.fb, "fb");
-    var pictureURL = replaced(HTMLbioPic, bio.pictureURL);
+    var pictureURL = replaced(HTMLbioPic, bio.biopic);
     var welcome = replaced(HTMLwelcomeMsg, bio.welcomeMessage);
 
     //jQuery begins
@@ -84,11 +84,7 @@ var education =
         var formatted_schoolLocation = replaced(HTMLschoolLocation, education.schools[i].location);
         $(".education-entry").append(formatted_schoolName,formatted_schoolDegree,formatted_schoolDates,formatted_schoolLocation);
         education.schools[i].majors.forEach(looper);
-
-
       }
-
-
     }
     if (education.onlineCourses.length > 0) {
       $(".education-entry").append(HTMLonlineClasses);
@@ -98,12 +94,9 @@ var education =
         var formatted_onlineDates = replaced(HTMLonlineDates, education.onlineCourses[x].dates);
         var formatted_onlineURL = replaced(HTMLonlineURL, education.onlineCourses[x].url);
         $(".education-entry").append(formatted_onlineTitle,formatted_onlineSchool, formatted_onlineDates, formatted_onlineURL);
-
       }
     }
-
   } // function education.display ends
-
 }; // object education ends
 
 var work = { // object work starts
@@ -121,42 +114,42 @@ var work = { // object work starts
     description: "Homer is dangerously unqualified to be a nuclear safety inspector, but he was even more unqualified to be an astronaut. Of course, that was sort of the point, as NASA wanted an everyman to send into space—the kind of guy who yells at the President about Tang, and flushes toilets for fun. Homer’s adventures in space were high-stakes hilarious, with insect overlords, and ruffled potato chips. But in the end, a hero emerged: an inanimate carbon rod. In Rod We Trust."
   }],
   display: function() { //function work.display  starts
-if (work.jobs.length>0){// if statement begins
-  $("#workExperience").append(HTMLworkStart);
-  for (var i = 0; i<work.jobs.length; i++){
-    var workEmployer=replaced(HTMLworkEmployer,work.jobs[i].employer);
-    var workTitle=replaced(HTMLworkTitle,work.jobs[i].title);
-    var workLocation=replaced(HTMLworkLocation,work.jobs[i].location);
-    var workDates=replaced(HTMLworkDates,work.jobs[i].dates);
-    var workDescription=replaced(HTMLworkDescription,work.jobs[i].description);
-    $(".work-entry").append(workEmployer + workTitle, workLocation,workDates,workDescription);
-  }
-}// if statement ends
+    if (work.jobs.length>0){// if statement begins
+    $("#workExperience").append(HTMLworkStart);
+    for (var i = 0; i<work.jobs.length; i++){
+      var workEmployer=replaced(HTMLworkEmployer,work.jobs[i].employer);
+      var workTitle=replaced(HTMLworkTitle,work.jobs[i].title);
+      var workLocation=replaced(HTMLworkLocation,work.jobs[i].location);
+      var workDates=replaced(HTMLworkDates,work.jobs[i].dates);
+      var workDescription=replaced(HTMLworkDescription,work.jobs[i].description);
+      $(".work-entry").append(workEmployer + workTitle, workLocation,workDates,workDescription);
+      }
+    }// if statement ends
 
   }//function work.display ends
 }; //object work ends
 var projects = { //object project begins
-  project: [{
+  projects: [{
     title: "Barbershop Quartet Singer",
     dates: "January 2005",
     description: "Granted, Homer had this job before the events of The Simpsons began, but it still got its own flashback episode, where The Be Sharps reunited atop Moe’s for one last concert. Nobody in the group ever showed musical acumen again (aside from Barney), but for a little while, The Be Sharps were bigger than Jesus—and they have the album to show it.",
-    image: ["./images/singer.jpg"]
+    images: ["./images/singer.jpg"]
   },
   {
     title: "Food Critic",
     dates: "February 2005",
     description: "On the surface, Homer as a food critic doesn’t seem to make sense, what with his general lack of education or writing skills. But Lisa provided the brains, and Homer brought the enthusiasm for food. When Homer did his own writing, it was all threatening references to the U.N., and \“Screw Flanders.\” It was Homer’s enthusiasm for pretty much everything he ate that made the gig especially memorable. Anytime somebody seems to be laying on the hyperbole, you can always trot out, \“Nine thumbs up? What the hell is that!?\”",
-    image: ["./images/critic.jpg","./images/power-plant.gif"]
+    images: ["./images/critic.jpg","./images/power-plant.gif"]
 
   }],
   display: function() { // function projects.display begins
-    for (var i = 0; i < projects.project.length; i++) {
-      var formatted_projectTitle = replaced(HTMLprojectTitle, projects.project[i].title);
-      var formatted_projectDates = replaced(HTMLprojectDates, projects.project[i].date);
-      var formatted_projectDescription = replaced(HTMLprojectDescription, projects.project[i].description);
+    for (var i = 0; i < projects.projects.length; i++) {
+      var formatted_projectTitle = replaced(HTMLprojectTitle, projects.projects[i].title);
+      var formatted_projectDates = replaced(HTMLprojectDates, projects.projects[i].date);
+      var formatted_projectDescription = replaced(HTMLprojectDescription, projects.projects[i].description);
       $("#projects").append(HTMLprojectStart);
       $(".project-entry:last").append(formatted_projectTitle,formatted_projectDates,formatted_projectDescription);
-      projects.project[i].image.forEach(looper);//projects.project[i].image forEach ends
+      projects.projects[i].images.forEach(looper);//projects.projects[i].image forEach ends
 
     }
     function looper(element){
